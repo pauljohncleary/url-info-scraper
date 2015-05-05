@@ -1,0 +1,26 @@
+{
+  "name": "url-info-scraper",
+  "version": "0.0.1",
+  "description": "Retrives a small amount of meta data from a URL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pauljohncleary/url-info-scraper"
+  },
+  "keywords": [
+    "url",
+    "metadata",
+    "scraper",
+    "title",
+    "crawler"
+  ],
+  "author": "Paul Cleary",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pauljohncleary/url-info-scraper/issues"
+  },
+  "homepage": "https://github.com/pauljohncleary/url-info-scraper"
+}
