@@ -13,15 +13,19 @@ describe('validLink submodule', function () {
   it('must return false for an object', function () {
     assert(!isLinkValid({hello: 'this object is not a weblink'}));
   });
-  it('must handle some links without an http prefix', function () {
+  it('must handle links without an http prefix correctly', function () {
     assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('google.com'));
+    assert(isLinkValid('www.google.co.uk'));
+    assert(isLinkValid('google.bz'));
+    assert(isLinkValid('ebay%20.com'));
+    assert(isLinkValid('www.google.nl/_/chrome/newtab?espv=2&ie=UTF-8'));
+    assert(isLinkValid('google.org'));
+
+  });
+  it('must return false for obviously invalid links', function () {
+    assert(!isLinkValid('go  ogle.  com'));
+    assert(!isLinkValid('mailto:someemailaddress@email.com'));
+    assert(!isLinkValid('javascript'));
   });
 });
 
