@@ -1,8 +1,32 @@
-URL Info Scraper
-=======
+#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-Takes a single url as input and returns an object containing the title, favicon address, status, mime type
+> Retrives a small amount of meta data from a URL
 
-Todo
-- Add tests
-- Wrapper for meteor package
+
+## Install
+
+```sh
+$ npm install --save url-info-scraper
+```
+
+
+## Usage
+
+```js
+var urlInfoScraper = require('url-info-scraper');
+
+urlInfoScraper('Rainbow');
+```
+
+
+## License
+
+MIT © [Paul Cleary](tab.bz)
+
+
+[npm-image]: https://badge.fury.io/js/url-info-scraper.svg
+[npm-url]: https://npmjs.org/package/url-info-scraper
+[travis-image]: https://travis-ci.org/pauljohncleary/url-info-scraper.svg?branch=master
+[travis-url]: https://travis-ci.org/pauljohncleary/url-info-scraper
+[daviddm-image]: https://david-dm.org/pauljohncleary/url-info-scraper.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/pauljohncleary/url-info-scraper
