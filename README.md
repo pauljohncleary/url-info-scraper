@@ -15,7 +15,7 @@ $ npm install --save url-info-scraper
 ```js
 var urlInfoScraper = require('url-info-scraper');
 
-urlInfoScraper('Rainbow');
+urlInfoScraper(url-to-get-info-about);
 ```
 
 
