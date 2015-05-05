@@ -1,26 +1,38 @@
 {
   "name": "url-info-scraper",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Retrives a small amount of meta data from a URL",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "homepage": "https://github.com/pauljohncleary/url-info-scraper",
+  "author": {
+    "name": "Paul Cleary",
+    "email": "pauljohncleary@gmail.com",
+    "url": "tab.bz"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/pauljohncleary/url-info-scraper"
-  },
+  "repository": "pauljohncleary/url-info-scraper",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
   "keywords": [
+    "url-info-scraper",
     "url",
     "metadata",
     "scraper",
     "title",
     "crawler"
   ],
-  "author": "Paul Cleary",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pauljohncleary/url-info-scraper/issues"
+  "dependencies": {},
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-cli": "^1.12.0",
+    "jshint-stylish": "^1.0.1",
+    "load-grunt-tasks": "^3.1.0",
+    "time-grunt": "^1.1.0"
   },
-  "homepage": "https://github.com/pauljohncleary/url-info-scraper"
+  "scripts": {
+    "test": "grunt"
+  }
 }
