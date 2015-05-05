@@ -31,39 +31,38 @@ describe('validLink submodule', function () {
 
 describe('url-info-scraper node module', function () {
   it('must return a status object', function (done) {
-    urlInfoScraper('http://google.com', function(statusObj) {
+    urlInfoScraper('http://google.com', function(error, statusObj) {
       assert(typeof statusObj === 'object');
       done();
     });
   });
 
   it('must return a status object with false in it if provided with a url that is invalid', function (done) {
-    urlInfoScraper('THIS IS AN INVALID LINK', function(statusObj) {
+    urlInfoScraper('THIS IS AN INVALID LINK', function(error, statusObj) {
       assert(!statusObj.isWebResource);
       done();
     });
   });
 
   it('must return a title in the status object', function (done) {
-    urlInfoScraper('http://google.com', function(statusObj) {
+    urlInfoScraper('http://google.com', function(error, statusObj) {
       assert(statusObj.title);
       done();
     });
   });
 
   it('must return a mime type in the status object', function (done) {
-    urlInfoScraper('http://google.com', function(statusObj) {
+    urlInfoScraper('http://google.com', function(error, statusObj) {
       assert(statusObj.mime);
       done();
     });
   });
 
   it('must return a mime type of image for an image resource', function (done) {
-    urlInfoScraper('http://lorempixel.com/400/200/', function(statusObj) {
+    urlInfoScraper('http://lorempixel.com/400/200/', function(error, statusObj) {
       assert.equal(statusObj.mime.substring(0,5), 'image');
       done();
     });
   });
-
 
 });

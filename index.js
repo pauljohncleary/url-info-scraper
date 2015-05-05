@@ -8,12 +8,10 @@ function start (url, cb) {
   if(linkIsValid(url)) {
     request(url, function (error, res, body) {
       if(error) {
-        return cb({
-          error: error
-        });
+        return cb(error, {});
       } else {
         var $ = cheerio.load(body);
-        return cb({
+        return cb(null, {
           isWebResource: true,
           title: $('title').text(),
           mime: res.headers['content-type'] || res.headers['Content-Type'] || res.headers['Content-type']
@@ -21,7 +19,7 @@ function start (url, cb) {
       }
     });
   } else {
-    return cb({isWebResource: false});
+    return cb(null, {isWebResource: false});
   }
 }
 

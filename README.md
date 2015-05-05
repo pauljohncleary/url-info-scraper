@@ -15,14 +15,15 @@ $ npm install --save url-info-scraper
 ```js
 var urlInfoScraper = require('url-info-scraper');
 
-urlInfoScraper(url-to-get-info-about);
+urlInfoScraper('http://en.wikipedia.org/wiki/Wikipedia', function(error, linkInfo) {
+  var title = linkInfo.title; //'Wikipedia - Wikipedia, the free encyclopedia'
+});
 ```
 
-Returns an object with the following properties
+The response is an object with the following properties:
 ```js
 {
-  isWebResource: true|false, //true if the link is valid
-  error: errorObject, //optional, if an error is thrown accessing the resource
+  isWebResource: boolean, //true if the link is valid
   title: string, //title of the page requested
   mime: string //content-type header of the page e.g. image/jpeg
 }
