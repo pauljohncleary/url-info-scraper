@@ -44,9 +44,23 @@ describe('url-info-scraper node module', function () {
     });
   });
 
-  it('must return a title in the status objet', function (done) {
+  it('must return a title in the status object', function (done) {
     urlInfoScraper('http://google.com', function(statusObj) {
       assert(statusObj.title);
+      done();
+    });
+  });
+
+  it('must return a mime type in the status object', function (done) {
+    urlInfoScraper('http://google.com', function(statusObj) {
+      assert(statusObj.mime);
+      done();
+    });
+  });
+
+  it('must return a mime type of image for an image resource', function (done) {
+    urlInfoScraper('http://lorempixel.com/400/200/', function(statusObj) {
+      assert.equal(statusObj.mime.substring(0,5), 'image');
       done();
     });
   });

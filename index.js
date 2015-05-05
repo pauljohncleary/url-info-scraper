@@ -6,7 +6,7 @@ var request = require('request'),
 
 function start (url, cb) {
   if(linkIsValid(url)) {
-    request(url, function (error, response, body) {
+    request(url, function (error, res, body) {
       if(error) {
         return cb({
           error: error
@@ -15,7 +15,8 @@ function start (url, cb) {
         var $ = cheerio.load(body);
         return cb({
           isWebResource: true,
-          title: $('title').text()
+          title: $('title').text(),
+          mime: res.headers['content-type'] || res.headers['Content-Type'] || res.headers['Content-type']
         });
       }
     });
