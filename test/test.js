@@ -7,6 +7,9 @@ describe('validLink submodule', function () {
   it('must return true for a valid link', function () {
     assert(isLinkValid('http://google.com'));
   });
+  it('must return true for a valid https link', function () {
+    assert(isLinkValid('https://google.com'));
+  });
   it('must return false for an invalid link', function () {
     assert(!isLinkValid('this is not a web link!!'));
   });
@@ -32,6 +35,13 @@ describe('validLink submodule', function () {
 describe('url-info-scraper node module', function () {
   it('must return a status object', function (done) {
     urlInfoScraper('http://google.com', function(error, statusObj) {
+      assert(typeof statusObj === 'object');
+      done();
+    });
+  });
+
+  it('must return a status object for links without an http prefix', function (done) {
+    urlInfoScraper('google.com', function(error, statusObj) {
       assert(typeof statusObj === 'object');
       done();
     });
