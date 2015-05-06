@@ -2,9 +2,11 @@
 
 var request = require('request'),
   cheerio = require('cheerio'),
+  httpPrefixer = require('./lib/httpPrefixer'),
   linkIsValid = require('./lib/validLink');
 
-function start (url, cb) {
+function start (link, cb) {
+  var url = httpPrefixer(link);
   if(linkIsValid(url)) {
     request(url, function (error, res, body) {
       if(error) {

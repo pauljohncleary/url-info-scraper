@@ -2,6 +2,20 @@
 var assert = require('assert');
 var urlInfoScraper = require('../');
 var isLinkValid = require('../lib/validLink');
+var httpPrefixer = require('../lib/httpPrefixer');
+
+describe('HTTP Prefixer submodule', function () {
+  it('must add http:// to a string that does not have it', function () {
+    assert.equal(httpPrefixer('google.com'), 'http://google.com');
+  });
+  it('must NOT add http:// to a string that already has it', function () {
+    assert.equal(httpPrefixer('http://google.com'), 'http://google.com');
+  });
+  it('must ignore non-strings', function () {
+    var testObj = {};
+    assert.equal(httpPrefixer(testObj), testObj);
+  });
+});
 
 describe('validLink submodule', function () {
   it('must return true for a valid link', function () {
@@ -11,19 +25,10 @@ describe('validLink submodule', function () {
     assert(isLinkValid('https://google.com'));
   });
   it('must return false for an invalid link', function () {
-    assert(!isLinkValid('this is not a web link!!'));
+    assert(!isLinkValid('http://this is not a web link!!'));
   });
   it('must return false for an object', function () {
     assert(!isLinkValid({hello: 'this object is not a weblink'}));
-  });
-  it('must handle links without an http prefix correctly', function () {
-    assert(isLinkValid('google.com'));
-    assert(isLinkValid('www.google.co.uk'));
-    assert(isLinkValid('google.bz'));
-    assert(isLinkValid('ebay%20.com'));
-    assert(isLinkValid('www.google.nl/_/chrome/newtab?espv=2&ie=UTF-8'));
-    assert(isLinkValid('google.org'));
-
   });
   it('must return false for obviously invalid links', function () {
     assert(!isLinkValid('go  ogle.  com'));
