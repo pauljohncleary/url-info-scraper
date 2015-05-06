@@ -38,6 +38,8 @@ describe('validLink submodule', function () {
 });
 
 describe('url-info-scraper node module', function () {
+  this.timeout(5000);
+
   it('must return a status object', function (done) {
     urlInfoScraper('http://google.com', function(error, statusObj) {
       assert(typeof statusObj === 'object');
@@ -76,6 +78,27 @@ describe('url-info-scraper node module', function () {
   it('must return a mime type of image for an image resource', function (done) {
     urlInfoScraper('http://lorempixel.com/400/200/', function(error, statusObj) {
       assert.equal(statusObj.mime.substring(0,5), 'image');
+      done();
+    });
+  });
+
+  it('must handle 404s', function (done) {
+    urlInfoScraper('http://httpstat.us/404', function(error, statusObj) {
+      assert(statusObj.isWebResource);
+      done();
+    });
+  });
+
+  it('must handle 500s', function (done) {
+    urlInfoScraper('http://httpstat.us/500', function(error, statusObj) {
+      assert(statusObj.isWebResource);
+      done();
+    });
+  });
+
+  it('must handle links that do not exist', function (done) {
+    urlInfoScraper('http://fsdalfjsdlkfjlsdjflskajflaskdjfla.com/400/200/', function(error, statusObj) {
+      assert(!statusObj.isWebResource);
       done();
     });
   });

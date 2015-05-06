@@ -8,7 +8,13 @@ var request = require('request'),
 function start (link, cb) {
   var url = httpPrefixer(link);
   if(linkIsValid(url)) {
-    request(url, function (error, res, body) {
+
+    var options = {
+      timeout: 4000,
+      url: url
+    };
+
+    request(options, function (error, res, body) {
       if(error) {
         return cb(error, {});
       } else {
