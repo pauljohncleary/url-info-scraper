@@ -103,4 +103,12 @@ describe('url-info-scraper node module', function () {
     });
   });
 
+  it('must abort when attemping to download huge files', function (done) {
+    urlInfoScraper('http://ipv4.download.thinkbroadband.com/20MB.zip', function(error, statusObj) {
+      assert(statusObj.tooLarge);
+      done();
+    });
+  });
+
+
 });
