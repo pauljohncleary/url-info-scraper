@@ -38,7 +38,7 @@ describe('validLink submodule', function () {
 });
 
 describe('url-info-scraper node module', function () {
-  this.timeout(5000);
+  this.timeout(25000);
 
   it('must return a status object', function (done) {
     urlInfoScraper('http://google.com', function(error, statusObj) {
@@ -103,9 +103,23 @@ describe('url-info-scraper node module', function () {
     });
   });
 
-  it('must abort when attemping to download huge files', function (done) {
-    urlInfoScraper('http://ipv4.download.thinkbroadband.com/20MB.zip', function(error, statusObj) {
+  it('must not download files greater than 5mb, that have the correct content length header', function (done) {
+    urlInfoScraper('http://edmullen.net/test/rc.jpg', function(error, statusObj) {
       assert(statusObj.tooLarge);
+      done();
+    });
+  });
+
+  it('must not download files greater than 5mb, that do not have the correct content length header', function (done) {
+    urlInfoScraper('https://upload.wikimedia.org/wikipedia/commons/f/ff/Pizigani_1367_Chart_10MB.jpg', function(error, statusObj) {
+      assert(statusObj.tooLarge);
+      done();
+    });
+  });
+
+  it('must not download items that have a mime type beginning with application', function (done) {
+    urlInfoScraper('http://ipv4.download.thinkbroadband.com/5MB.zip', function(error, statusObj) {
+      assert(!statusObj.parsable);
       done();
     });
   });

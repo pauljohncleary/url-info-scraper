@@ -15,7 +15,7 @@ function start (link, cb) {
     };
 
     //use a HEAD request to check the file content header size in case it's a large file (10MB max)
-    var maxSize = 104850;
+    var maxSize = 5242880;
     request({
         url: url,
         method: "HEAD"
@@ -23,13 +23,22 @@ function start (link, cb) {
       if(error) {
         return cb(error, {});
       } else {
-        var size = headRes.headers['content-length'];
-        if (size > maxSize*1000) {
+        var size = headRes.headers['content-length'],
+          mime = headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type'];
+        if (size > maxSize) {
           return cb(null, {
             isWebResource: true,
             title: url,
             tooLarge: true,
-            mime: headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type']
+            mime: mime
+          });
+        }
+        if (mime.substring(1,11) === 'pplication' )  {
+          return cb(null, {
+            isWebResource: true,
+            parsable: false,
+            title: url,
+            mime: mime
           });
         } else {
           //do a proper request for the HTML content etc. monitoring the size in case someone requests something bigger than 10MB
@@ -49,9 +58,10 @@ function start (link, cb) {
 
           requestObject.on('data', function(data) {
             count += data.length;
+            //console.log(count);
             if (count > maxSize) {
               requestObject.abort(); // Abort the response (close and cleanup the stream)
-              return cb(null, {isWebResource: true, tooLarge: true}); //the mime type cannot be trusted!
+              return cb(null, {isWebResource: true, tooLarge: true, title: url}); //the mime type cannot be trusted!
             }
           });
         }
