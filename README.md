@@ -29,6 +29,14 @@ The response is an object with the following properties:
 }
 ```
 
+## Todo
+- Rewrite tests to use mocked resources instead of real ones
+- Favicon support
+- "Best image" support
+- Store additional metadata (response time etc.)
+- Screenshots
+- ...?
+
 ## License
 
 MIT © [Paul Cleary](tab.bz)
