@@ -9,12 +9,20 @@ function start (link, cb) {
   var url = httpPrefixer(link);
   if(linkIsValid(url)) {
 
+    var responseObject = {
+      isWebResource: true,
+      title: url,
+      tooLarge: false,
+      parsable: true,
+      mime: false
+    };
+
     var options = {
       timeout: 4000,
       url: url
     };
 
-    //use a HEAD request to check the file content header size in case it's a large file (10MB max)
+    //use a HEAD request to check the file content header size in case it's a large file (5MB max)
     var maxSize = 5242880;
     request({
         url: url,
@@ -23,23 +31,15 @@ function start (link, cb) {
       if(error) {
         return cb(error, {});
       } else {
-        var size = headRes.headers['content-length'],
-          mime = headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type'];
+        var size = headRes.headers['content-length'];
+        responseObject.mime = headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type'];
         if (size > maxSize) {
-          return cb(null, {
-            isWebResource: true,
-            title: url,
-            tooLarge: true,
-            mime: mime
-          });
+          responseObject.tooLarge = true;
+          return cb(null, responseObject);
         }
-        if (mime.substring(1,11) === 'pplication' )  {
-          return cb(null, {
-            isWebResource: true,
-            parsable: false,
-            title: url,
-            mime: mime
-          });
+        if (responseObject.mime.substring(1,11) === 'pplication' )  {
+          responseObject.parsable = false;
+          return cb(null, responseObject);
         } else {
           //do a proper request for the HTML content etc. monitoring the size in case someone requests something bigger than 10MB
           var count = 0;
@@ -48,20 +48,18 @@ function start (link, cb) {
               return cb(error, {});
             } else {
               var $ = cheerio.load(body);
-              return cb(null, {
-                isWebResource: true,
-                title: $('title').text(),
-                mime: res.headers['content-type'] || res.headers['Content-Type'] || res.headers['Content-type']
-              });
+              responseObject.title = $('title').text();
+              responseObject.mime = res.headers['content-type'] || res.headers['Content-Type'] || res.headers['Content-type'];
+              return cb(null, responseObject);
             }
           });
 
           requestObject.on('data', function(data) {
             count += data.length;
-            //console.log(count);
             if (count > maxSize) {
               requestObject.abort(); // Abort the response (close and cleanup the stream)
-              return cb(null, {isWebResource: true, tooLarge: true, title: url}); //the mime type cannot be trusted!
+              responseObject.tooLarge = true;
+              return cb(null, responseObject);
             }
           });
         }

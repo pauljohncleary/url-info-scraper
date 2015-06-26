@@ -25,7 +25,9 @@ The response is an object with the following properties:
 {
   isWebResource: boolean, //true if the link is valid
   title: string, //title of the page requested
-  mime: string //content-type header of the page e.g. image/jpeg
+  mime: string, //content-type header of the page e.g. image/jpeg
+  parsable: boolean, //false if the content type is 'application'
+  tooLarge: boolean //true if the link body is greater than 5MB
 }
 ```
 
