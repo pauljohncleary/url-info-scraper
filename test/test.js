@@ -124,5 +124,25 @@ describe('url-info-scraper node module', function () {
     });
   });
 
+  it('must return a favicon url, from a url that has the favicon defined using the rel=icon tag', function (done) {
+    urlInfoScraper('https://github.com/pauljohncleary/url-info-scraper', function(error, statusObj) {
+      assert(statusObj.faviconUrl);
+      done();
+    });
+  });
+
+  it('must return a favicon url, from a url that has the favicon defined using the rel="shortcut icon" tag', function (done) {
+    urlInfoScraper('https://en.wikipedia.org/wiki/Favicon#How_to_use', function(error, statusObj) {
+      assert(statusObj.faviconUrl);
+      done();
+    });
+  });
+
+  it('must return a favicon url, from a url that has no link rel favicon defined', function (done) {
+    urlInfoScraper('http://www.bbc.co.uk/', function(error, statusObj) {
+      assert(statusObj.faviconUrl);
+      done();
+    });
+  });
 
 });

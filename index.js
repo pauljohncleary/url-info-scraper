@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var request = require('request'),
-  cheerio = require('cheerio'),
+  metadata = require('./lib/metadata'),
   httpPrefixer = require('./lib/httpPrefixer'),
   linkIsValid = require('./lib/validLink');
 
@@ -43,14 +43,17 @@ function start (link, cb) {
         } else {
           //do a proper request for the HTML content etc. monitoring the size in case someone requests something bigger than 10MB
           var count = 0;
+
           var requestObject = request(options, function (error, res, body) {
             if(error) {
               return cb(error, {});
             } else {
-              var $ = cheerio.load(body);
-              responseObject.title = $('title').text();
-              responseObject.mime = res.headers['content-type'] || res.headers['Content-Type'] || res.headers['Content-type'];
-              return cb(null, responseObject);
+              metadata.getMeta(res.headers, body, url, function(err, metadata) {
+                responseObject.title = metadata.title;
+                responseObject.mime = metadata.mime;
+                responseObject.faviconUrl = metadata.faviconUrl;
+                return cb(null, responseObject);
+              });
             }
           });
 

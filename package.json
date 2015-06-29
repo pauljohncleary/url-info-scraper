@@ -1,6 +1,6 @@
 {
   "name": "url-info-scraper",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "Retrives a small amount of meta data from a URL",
   "homepage": "https://github.com/pauljohncleary/url-info-scraper",
   "author": {
@@ -24,6 +24,8 @@
   ],
   "dependencies": {
     "cheerio": "^0.19.0",
+    "favicon": "0.0.2",
+    "find-favicon": "^0.1.2",
     "request": "^2.55.0",
     "request-promise": "^0.4.2",
     "url": "^0.10.3",

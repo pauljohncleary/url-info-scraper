@@ -27,13 +27,14 @@ The response is an object with the following properties:
   title: string, //title of the page requested
   mime: string, //content-type header of the page e.g. image/jpeg
   parsable: boolean, //false if the content type is 'application'
-  tooLarge: boolean //true if the link body is greater than 5MB
+  tooLarge: boolean, //true if the link body is greater than 5MB
+  faviconUrl: string //the url of the favicon for the root site, null if not found
 }
 ```
 
 ## Todo
 - Rewrite tests to use mocked resources instead of real ones
-- Favicon support
+- ~~Favicon support~~
 - "Best image" support
 - Store additional metadata (response time etc.)
 - Screenshots
