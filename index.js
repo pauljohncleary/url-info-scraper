@@ -32,7 +32,7 @@ function start (link, cb) {
         return cb(error, {});
       } else {
         var size = headRes.headers['content-length'];
-        responseObject.mime = headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type'];
+        responseObject.mime = headRes.headers['content-type'] || headRes.headers['Content-Type'] || headRes.headers['Content-type'] || '';
         if (size > maxSize) {
           responseObject.tooLarge = true;
           return cb(null, responseObject);

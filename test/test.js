@@ -145,4 +145,11 @@ describe('url-info-scraper node module', function () {
     });
   });
 
+  it('must not crash when the mime type is missing from the HEAD response', function (done) {
+    urlInfoScraper('www.hs.fi', function(error, statusObj) {
+      assert(statusObj);
+      done();
+    });
+  });
+
 });
