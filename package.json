@@ -1,7 +1,7 @@
 {
   "name": "url-info-scraper",
-  "version": "0.1.1",
-  "description": "Retrives a small amount of meta data from a URL",
+  "version": "0.1.2",
+  "description": "Library to retrieve meta data (title, favicon address etc) from a url",
   "homepage": "https://github.com/pauljohncleary/url-info-scraper",
   "author": {
     "name": "Paul Cleary",
@@ -16,18 +16,21 @@
   ],
   "keywords": [
     "url-info-scraper",
+    "url info scraper",
     "url",
     "metadata",
     "scraper",
     "title",
-    "crawler"
+    "crawler",
+    "favicon",
+    "mime",
+    "type",
+    "checker",
+    "info"
   ],
   "dependencies": {
     "cheerio": "^0.19.0",
-    "favicon": "0.0.2",
-    "find-favicon": "^0.1.2",
     "request": "^2.55.0",
-    "request-promise": "^0.4.2",
     "url": "^0.10.3",
     "valid-url": "^1.0.9"
   },

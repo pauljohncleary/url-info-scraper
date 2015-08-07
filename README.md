@@ -1,6 +1,6 @@
 #  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-> Retrives a small amount of meta data from a URL
+> Library to retrieve meta data (title, favicon address etc) from a url
 
 
 ## Install
@@ -33,8 +33,7 @@ The response is an object with the following properties:
 ```
 
 ## Todo
-- Rewrite tests to use mocked resources instead of real ones
-- ~~Favicon support~~
+- Rewrite tests to use mocked resources instead of real urls
 - "Best image" support
 - Store additional metadata (response time etc.)
 - Screenshots
