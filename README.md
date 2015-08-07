@@ -50,3 +50,7 @@ MIT © [Paul Cleary](tab.bz)
 [travis-url]: https://travis-ci.org/pauljohncleary/url-info-scraper
 [daviddm-image]: https://david-dm.org/pauljohncleary/url-info-scraper.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/pauljohncleary/url-info-scraper
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/pauljohncleary/url-info-scraper/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
