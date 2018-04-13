@@ -1,12 +1,12 @@
 {
   "name": "url-info-scraper",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Library to retrieve meta data (title, favicon address etc) from a url",
   "homepage": "https://github.com/pauljohncleary/url-info-scraper",
   "author": {
     "name": "Paul Cleary",
     "email": "pauljohncleary@gmail.com",
-    "url": "tab.bz"
+    "url": "https://tab.bz"
   },
   "repository": "pauljohncleary/url-info-scraper",
   "license": "MIT",
