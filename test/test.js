@@ -1,8 +1,11 @@
 'use strict';
+var cheerio = require('cheerio');
+var request = require('request');
 var assert = require('assert');
 var urlInfoScraper = require('../');
 var isLinkValid = require('../lib/validLink');
 var httpPrefixer = require('../lib/httpPrefixer');
+var metadata = require('../lib/metadata');
 
 describe('HTTP Prefixer submodule', function () {
   it('must add http:// to a string that does not have it', function () {
@@ -34,6 +37,22 @@ describe('validLink submodule', function () {
     assert(!isLinkValid('go  ogle.  com'));
     assert(!isLinkValid('mailto:someemailaddress@email.com'));
     assert(!isLinkValid('javascript'));
+  });
+});
+
+describe('Metadata submodule', function () {
+  it('returns the first title if there are many', function (done) {
+    var url = "https://twilio.com";
+    var options = { timeout: 4000, url: url };
+    request(options, function (error, res, body) {
+      assert(!error);
+      var $ = cheerio.load(body);
+      var title = $('title').first().text();
+      metadata.getMeta(res.headers, body, url, function(err, metadata) {
+        assert.equal(title, metadata.title);
+        done();
+      });
+    });
   });
 });
 
@@ -76,7 +95,7 @@ describe('url-info-scraper node module', function () {
   });
 
   it('must return a mime type of image for an image resource', function (done) {
-    urlInfoScraper('http://lorempixel.com/400/200/', function(error, statusObj) {
+    urlInfoScraper('https://www.w3schools.com/w3css/img_lights.jpg', function(error, statusObj) {
       assert.equal(statusObj.mime.substring(0,5), 'image');
       done();
     });
